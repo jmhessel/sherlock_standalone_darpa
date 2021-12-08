@@ -2,6 +2,10 @@
 This script downloads the best model and the data needed to run the analytic.
 
 python download_model_and_data.py
+
+to clean temporary data files you can run:
+
+rm *.zip ; rm im2txt_annotations_all_v2.json; rm -rf self_eval_images/; rm val_instances_darpa_self_eval.json; rm *.pt; rm -rf *~predictions;
 '''
 import argparse
 import subprocess
