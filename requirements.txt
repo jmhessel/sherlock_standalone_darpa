@@ -1,0 +1,13 @@
+bert_score~=0.3.8
+clip~=1.0
+matplotlib~=3.4.3
+numpy~=1.20.3
+Pillow~=8.4.0
+pycocoevalcap~=1.2
+scikit_learn~=1.0.1
+scipy~=1.7.3
+seaborn~=0.11.0
+statsmodels~=0.13.1
+torch~=1.10.0+cu113
+torchvision~=0.11.1+cu113
+tqdm~=4.51.0
