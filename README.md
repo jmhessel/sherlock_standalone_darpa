@@ -1,6 +1,6 @@
-<h3><strong><center>SHERLOCK: A Study in Visual Abductive Reasoning</center></strong></h3>
+<h1><strong><center>SHERLOCK: A Study in Visual Abductive Reasoning</center></strong></h1>
 
-## TL;DR
+### What is Sherlock?
 
 We collected a large corpus of *abductive inferences* over
 images. Abductive reasoning is the act of reasoning about plausible
