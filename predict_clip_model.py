@@ -54,7 +54,7 @@ def parse_args():
 
     parser.add_argument('--workers_dataloader',
                         type=int,
-                        default=8)
+                        default=0)
 
     parser.add_argument('--prompt_for_zero_shot',
                         type=str,
