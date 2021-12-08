@@ -5,7 +5,7 @@ python download_model_and_data.py
 
 to clean temporary data files you can run:
 
-rm *.zip ; rm im2txt_annotations_all_v2.json; rm -rf self_eval_images/; rm val_instances_darpa_self_eval.json; rm *.pt; rm -rf *~predictions;
+rm *.zip ; rm im2txt_annotations_all_v2.json; rm -rf self_eval_images/; rm val_instances_darpa_self_eval.json; rm *.pt; rm -rf *~predictions; rm auto_metrics.json; rm examples.html; rm top_10_predictions.tsv; rm -rf __pycache__/;
 '''
 import argparse
 import subprocess
