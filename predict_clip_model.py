@@ -163,7 +163,7 @@ def main():
         im2text_dist = sklearn.metrics.pairwise_distances(all_val_im_embs,
                                                           all_val_txt_embs,
                                                           metric='cosine',
-                                                          n_jobs=args.workers_dataloader)
+                                                          n_jobs=args.workers_dataloader if args.workers_dataloader > 0 else None)
         np.save(args.output_predictions_path + "_image2text_cosine_dists.npy", im2text_dist)
 
         if not args.dont_compute_ranking:
