@@ -1,20 +1,5 @@
 '''
-Finetunes CLIP model for retrieval
-
-CUDA_VISIBLE_DEVICES=6 python predict_clip_model.py /net/nfs2.mosaic/jackh/sherlock_trainvaltest/sherlock_val.json model=ViT-B32~batch=256~warmup=1000~lr=1e-05~valloss=3.4927.pt --hide_true_bbox 0 --clip_model ViT-B/32
-CUDA_VISIBLE_DEVICES=6 python predict_clip_model.py /net/nfs2.mosaic/jackh/sherlock_trainvaltest/sherlock_val.json model=ViT-B32~batch=256~warmup=1000~lr=1e-05~valloss=3.2398~hiddenbbox.pt --hide_true_bbox 1 --clip_model ViT-B/32
-CUDA_VISIBLE_DEVICES=6 python predict_clip_model.py /net/nfs2.mosaic/jackh/sherlock_trainvaltest/sherlock_val.json model=ViT-B32~batch=256~warmup=1000~lr=1e-05~valloss=2.5162~highlightbbox.pt --hide_true_bbox 2 --clip_model ViT-B/32
-
-CUDA_VISIBLE_DEVICES=6 python predict_clip_model.py /net/nfs2.mosaic/jackh/sherlock_trainvaltest/sherlock_val.json model=ViT-B32~batch=256~warmup=1000~lr=1e-05~valloss=2.9133~blackoutbbox.pt --hide_true_bbox 3 --clip_model ViT-B/32
-
-CUDA_VISIBLE_DEVICES=5 python predict_clip_model.py /net/nfs2.mosaic/jackh/sherlock_trainvaltest/sherlock_val.json model=ViT-B32~batch=300~warmup=1000~lr=1e-05~valloss=1.2707~clueasimage.pt --hide_true_bbox 4 --clip_model ViT-B/32
-
-CUDA_VISIBLE_DEVICES=5 python predict_clip_model.py /net/nfs2.mosaic/jackh/sherlock_trainvaltest/sherlock_val.json zero_shot_original --hide_true_bbox 0 --clip_model ViT-B/32
-CUDA_VISIBLE_DEVICES=5 python predict_clip_model.py /net/nfs2.mosaic/jackh/sherlock_trainvaltest/sherlock_val.json zero_shot_hide --hide_true_bbox 1 --clip_model ViT-B/32
-CUDA_VISIBLE_DEVICES=5 python predict_clip_model.py /net/nfs2.mosaic/jackh/sherlock_trainvaltest/sherlock_val.json zero_shot_highlight --hide_true_bbox 2 --clip_model ViT-B/32
-
-# "A photo of " cant be beat...
-CUDA_VISIBLE_DEVICES=6 python predict_clip_model.py ../main_data/sherlock_test_with_split_idxs.json zero_shot_with_prompt --clip_model RN50x16 --hide_true_bbox 0 --workers_dataloader 8 --widescreen_processing 1
+This script computes predictions for the sherlock dataset.
 
 '''
 import argparse
@@ -55,17 +40,17 @@ def parse_args():
 
     parser.add_argument(
         '--vcr_dir',
-        default='/net/nfs2.mosaic/jackh/vcr_images/vcr1images/',
+        default='self_eval_images',
         help='directory with all of the VCR image data, contains, e.g., movieclips_Lethal_Weapon')
 
     parser.add_argument(
         '--vg_dir',
-        default='/net/nfs2.mosaic/jackh/extract_butd_image_features_sherlock/',
+        default='self_eval_images',
         help='directory with visual genome data, contains VG_100K and VG_100K_2')
 
     parser.add_argument('--hide_true_bbox',
                         type=int,
-                        default=0)
+                        default=2)
 
     parser.add_argument('--workers_dataloader',
                         type=int,
@@ -73,7 +58,6 @@ def parse_args():
 
     parser.add_argument('--prompt_for_zero_shot',
                         type=str,
-                        #default='A photo of a purple box indicating that ') # for highlight mode
                         default='A photo of ') # for no highlight mode
 
     parser.add_argument('--widescreen_processing',
@@ -175,8 +159,6 @@ def main():
 
         all_val_im_embs = torch.cat(all_val_im_embs).cpu()
         all_val_txt_embs = torch.cat(all_val_txt_embs).cpu()
-        np.save(args.output_predictions_path + "_image_embs.npy", all_val_im_embs)
-        np.save(args.output_predictions_path + "_text_embs.npy", all_val_txt_embs)
 
         im2text_dist = sklearn.metrics.pairwise_distances(all_val_im_embs,
                                                           all_val_txt_embs,
@@ -192,8 +174,6 @@ def main():
                 np.mean(text2im_ranks),
                 len(text2im_ranks)))
         print('Final val loss: {:.5f}'.format(running_sum_loss / n))
-        with open(args.output_predictions_path + "_instances.json", 'w') as f:
-            f.write(json.dumps(insts))
 
 if __name__ == '__main__':
     main()
