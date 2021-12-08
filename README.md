@@ -28,7 +28,7 @@ The outputs are also available in tsv/html format in this repo under `outputs_hu
 
 ## How to run the code?
 
-There are 5 scripts, which can all be run by executing `./run_all.sh'. They do the following:
+There are 5 scripts, which can all be run by executing `./run_all.sh`. They do the following:
 
 1. Download the model/data.
 2. Run the prediction script which runs the model on the data (a GPU really helps speed!)
@@ -40,7 +40,7 @@ There are 5 scripts, which can all be run by executing `./run_all.sh'. They do t
 
 We evaluate our model using both automatic metrics and using correlation with human judgement.
 
-##### Automatic metrics
+#### Automatic metrics
 **Automatic metrics** measure the capacity of the model to search for
 plausible inferences across over a large number of candidates. Each
 image/bounding box has a corresponding inference that an annotator
@@ -66,7 +66,7 @@ robertascoref_hardmode: 25.55 (higher better, UNITER-Large baseline=18.7)
 
 In all cases, our CLIP based model outperforms UNITER-Large.
 
-##### Human Judgement Correlation
+#### Human Judgement Correlation
 
 Retrieval metrics provide some perspective on how well the model is
 able to retrieve the ground-truth annotations from a large corpus. But
