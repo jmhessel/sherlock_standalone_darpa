@@ -1,5 +1,5 @@
 '''
-This script computes predictions for the sherlock dataset.
+This script computes predictions for the sherlock dataset. A GPU is quite helpful.
 
 '''
 import argparse
@@ -31,11 +31,11 @@ def parse_args():
                         default=str)
 
     parser.add_argument('--clip_model',
-                        default='ViT-B/16',
+                        default='RN50x16',
                         choices=['ViT-B/32', 'RN50', 'RN101', 'RN50x4', 'ViT-B/16', 'RN50x16'])
 
     parser.add_argument('--batch_size',
-                        default=256,
+                        default=64,
                         type=int)
 
     parser.add_argument(
