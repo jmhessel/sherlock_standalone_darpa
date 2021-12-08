@@ -36,6 +36,25 @@ There are 5 scripts, which can all be run by executing `./run_all.sh`. They do t
 4. Run human correlation results.
 5. Run exploration script that outputs human readable predictions
 
+There's also a dockerfile included with this repo which will built an
+environment for the code to run. It can be built with
+
+```
+docker build . -t sherlock_docker_selfeval
+```
+
+depending on which GPU you are using, you can run with:
+```
+docker run  --gpus '"device=0"' sherlock_docker_selfeval
+```
+
+or, if you want to drop into the bash shell:
+```
+docker run --gpus '"device=0"' -it --entrypoint bash sherlock_docker_selfeval
+```
+
+Then, to run in docker, you can do 
+
 ### How is the model evaluated?
 
 We evaluate our model using both automatic metrics and using correlation with human judgement.
