@@ -24,15 +24,11 @@ are given here:
 
 A full, true random sample of predictions is given
 [here.](https://jmhessel.com/projects/sherlock/darpa_self_eval_examples.html),
-and is also available in tsv/html format in this repo under
+and is also available in tsv/html format in this repo under `outputs_human_readable/`.
 
 
-The
-evaluations are twofold
+The model is quantiatively evaluated across two sets of metrics.
 
-
-
-This repo contains a standalone version of our sherlock data/models for self-evaluation.
 
 ## How to run the code?
 
