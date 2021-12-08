@@ -1,35 +1,10 @@
 '''
+NOTE: This script is used to train RN50x16_best_checkpoint_inference_only.pt
+But, it requires 8 large GPUs. So, this script should not be called directly.
+It's included for reference and because some of the data loaders are needed
+for the prediction script.
+
 Finetunes CLIP model for retrieval
-
-CUDA_VISIBLE_DEVICES=6 python train_retrieval_clip.py /net/nfs2.mosaic/jackh/sherlock_trainvaltest/sherlock_val.json /net/nfs2.mosaic/jackh/sherlock_trainvaltest/sherlock_val.json --workers_dataloader 8 --batch_size 256 --clip_model ViT-B/32
-
-BEST RN50 Setting.
-
-Ablations ---
-
-clip_model_outputs/model=RN50x16~batch=200~warmup=500~lr=1e-05~valloss=2.0003~highlightbbox~widescreen.pt
-
-# best settings
-python train_retrieval_clip.py /var/jackh/data/sherlock_trainvaltest/sherlock_train.json /var/jackh/data/sherlock_trainvaltest/sherlock_val.json --workers_dataloader 16 --clip_model RN50x16 --lr .00001 --batch_size 200 --warmup 500 --n_epochs 5 --hide_true_bbox 2 --widescreen_processing 1
-
-# ablations
-
-echo "resize image"
-python train_retrieval_clip.py /var/jackh/data/sherlock_trainvaltest/sherlock_train.json /var/jackh/data/sherlock_trainvaltest/sherlock_val.json --workers_dataloader 16 --clip_model RN50x16 --lr .00001 --batch_size 200 --warmup 500 --n_epochs 5 --hide_true_bbox 2 --widescreen_processing 2 --output_dir ablations --vcr_dir /var/jackh/data --vg_dir /var/jackh/data
-
-echo "center crop"
-python train_retrieval_clip.py /var/jackh/data/sherlock_trainvaltest/sherlock_train.json /var/jackh/data/sherlock_trainvaltest/sherlock_val.json --workers_dataloader 16 --clip_model RN50x16 --lr .00001 --batch_size 200 --warmup 500 --n_epochs 5 --hide_true_bbox 2 --widescreen_processing 0 --output_dir ablations --vcr_dir /var/jackh/data --vg_dir /var/jackh/data
- 
-echo "dont highlight region"
-python train_retrieval_clip.py /var/jackh/data/sherlock_trainvaltest/sherlock_train.json /var/jackh/data/sherlock_trainvaltest/sherlock_val.json --workers_dataloader 16 --clip_model RN50x16 --lr .00001 --batch_size 200 --warmup 500 --n_epochs 5 --hide_true_bbox 0 --widescreen_processing 1 --output_dir ablations --vcr_dir /var/jackh/data --vg_dir /var/jackh/data
-
-echo "only region available"
-python train_retrieval_clip.py /var/jackh/data/sherlock_trainvaltest/sherlock_train.json /var/jackh/data/sherlock_trainvaltest/sherlock_val.json --workers_dataloader 16 --clip_model RN50x16 --lr .00001 --batch_size 200 --warmup 500 --n_epochs 5 --hide_true_bbox 3 --widescreen_processing 1 --output_dir ablations --vcr_dir /var/jackh/data --vg_dir /var/jackh/data
-
-echo "only context available"
-python train_retrieval_clip.py /var/jackh/data/sherlock_trainvaltest/sherlock_train.json /var/jackh/data/sherlock_trainvaltest/sherlock_val.json --workers_dataloader 16 --clip_model RN50x16 --lr .00001 --batch_size 200 --warmup 500 --n_epochs 5 --hide_true_bbox 1 --widescreen_processing 1 --output_dir ablations --vcr_dir /var/jackh/data --vg_dir /var/jackh/data
-
-
 '''
 import argparse
 import numpy as np
