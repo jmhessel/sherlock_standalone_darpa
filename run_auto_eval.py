@@ -92,10 +92,12 @@ def main():
     print('txt2im: {:.2f} (lower better, UNITER-Large baseline=64.7)'.format(np.mean(txt2ims)))
     print('im2txt p@1: {:.2f} (higher better, UNITER-Large baseline=11.7)'.format(np.mean(p_at_1_im2txt)))
     k = 'robertascoref_hardmode'
-    print(k + ': {:.2f} (higher better, UNITER-Large baseline=18.7)'.format(100*np.mean(generation_metrics['robertascoref'])))
+    print(k + ': {:.2f} (higher better, UNITER-Large baseline=18.7)'.format(100*np.mean(generation_metrics[k])))
     print('INSTANCES IDENTIFIER:')
     digest = run_hash.hexdigest()
     print(digest)
+    print('digest should be:')
+    print('00ef77c5ffc358a17ebde21fe0400e3d9454e4ab19fc3a1747fdf460f9b9050ecb2cc9ea65f93ed5f2792dad64ac5a9ca56f060a1f60a94697737b6c96415a49')
     with open(args.output_json, 'w') as f:
         f.write(json.dumps(
             {'im2txt': im2txts,
