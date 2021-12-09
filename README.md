@@ -63,7 +63,8 @@ The outputs of this command are twofold:
 
 If you run in docker, these will be contained in the main working
 directory. For ease of access, we've also added precomputed outputs to
-the `outputs_human_readable` directory.
+the `outputs_human_readable` directory. We also include these predictions
+in MSWORD format under that directory.
 
 ## How is the model evaluated?
 
