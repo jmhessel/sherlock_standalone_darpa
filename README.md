@@ -36,26 +36,24 @@ There are 5 scripts, which can all be run by executing `./run_all.sh`. They do t
 4. Run human correlation results.
 5. Run exploration script that outputs human readable predictions
 
-There's also a dockerfile included with this repo which will built an
-environment for the code to run. It can be built with
+There's also a dockerfile included with this repo which will build an
+environment for the code to run.
 
-```
-docker build . -t sherlock_docker_selfeval
-```
-
-or, you can just pull it from dockerhub:
+The easy way to run is to pull/run from dockerhub, replacing 0
+with whatever gpu is free on your machine. You can also run on CPU,
+by removing the `--gpus` flag, but it's much slower.
 ```
 docker pull jmhessel/sherlock_docker_selfeval:latest
+docker run  --gpus '"device=0"' jmhessel/sherlock_docker_selfeval
+```
+you can also drop to the command line within the image
+```
+docker run -it --entrypoint bash --gpus '"device=0"' jmhessel/sherlock_docker_selfeval
 ```
 
-depending on which GPU you are using, you can run with:
+if you dont want to use dockerhub, you can build the docker yourself.
 ```
-docker run  --gpus '"device=0"' sherlock_docker_selfeval
-```
-
-or, if you want to drop into the bash shell:
-```
-docker run --gpus '"device=0"' -it --entrypoint bash sherlock_docker_selfeval
+docker build . -t sherlock_docker_selfeval
 ```
 
 ### How is the model evaluated?
@@ -63,7 +61,7 @@ docker run --gpus '"device=0"' -it --entrypoint bash sherlock_docker_selfeval
 We evaluate our model using both automatic metrics and using correlation with human judgment.
 
 #### Automatic metrics
-**Automatic metrics** measure the capacity of the model to search for
+Automatic metrics measure the capacity of the model to search for
 plausible inferences across over a large number of candidates. Each
 image/bounding box has a corresponding inference that an annotator
 authored specific to that image/bounding box. As a result, we can
