@@ -42,7 +42,7 @@ def save_html(insts, im2txt, n=100, seed=1):
 def main():
     args = parse_args()
     np.random.seed(1)
-    
+
     with open(args.insts_in) as f:
         insts = json.load(f)
 
@@ -50,8 +50,6 @@ def main():
 
     # write tsv of top 10 predictions
     lines = []
-    header = ['image_url'] + ['base_image_url'] + ['top_{}_pred'.format(idx) for idx in range(1, 11)] + ['top_{}_pred_id'.format(idx) for idx in range(1, 11)] + ['true_inference', 'true_inference_rank']
-    lines.append('\t'.join(header))
 
     true_ranks = []
     for idx, inst in tqdm.tqdm(enumerate(insts)):
@@ -66,11 +64,13 @@ def main():
         lines.append('\t'.join([image_url, base_image_url] + predicted_infs + predicted_infs_ids + [true_inference] + [str(true_inference_rank)]))
 
     save_html(insts, im2txt)
-        
+
     np.random.shuffle(lines)
+    header = ['image_url'] + ['base_image_url'] + ['top_{}_pred'.format(idx) for idx in range(1, 11)] + ['top_{}_pred_id'.format(idx) for idx in range(1, 11)] + ['true_inference', 'true_inference_rank']
+    lines = ['\t'.join(header)] + lines
     with open(args.tsv_out_top_predictions, 'w') as f:
         f.write('\n'.join(lines))
-        
+
 
 if __name__ == '__main__':
     main()
