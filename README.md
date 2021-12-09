@@ -43,6 +43,11 @@ environment for the code to run. It can be built with
 docker build . -t sherlock_docker_selfeval
 ```
 
+or, you can just pull it from dockerhub:
+```
+docker pull jmhessel/sherlock_docker_selfeval:latest
+```
+
 depending on which GPU you are using, you can run with:
 ```
 docker run  --gpus '"device=0"' sherlock_docker_selfeval
@@ -52,8 +57,6 @@ or, if you want to drop into the bash shell:
 ```
 docker run --gpus '"device=0"' -it --entrypoint bash sherlock_docker_selfeval
 ```
-
-Then, to run in docker, you can do 
 
 ### How is the model evaluated?
 
