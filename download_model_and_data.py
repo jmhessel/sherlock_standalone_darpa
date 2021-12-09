@@ -33,7 +33,7 @@ def main():
             call('wget {}'.format(url))
 
     if not os.path.exists('im2txt_annotations_all_v2.json'):
-        call('unzip im2txt_annotations_all_v2.json.zip')
+        call('unzip im2txt_annotations_all_v2.zip')
     if not os.path.exists('self_eval_images/VG_100K_2/2412277.jpg'):
         call('unzip self_eval_images.zip')
     if not os.path.exists('val_instances_darpa_self_eval.json'):
