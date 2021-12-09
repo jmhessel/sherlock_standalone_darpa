@@ -114,7 +114,7 @@ and the performance of a random predictor (to serve as a lower bound).
 
 ```
 Human Agreement (upper bound): 42.22
-Our Model corr: 21.83
+Our Model corr: 21.77
 UNITER-Large Baseline: 18.7
 Random corr (lower bound): 1.20
 ```
