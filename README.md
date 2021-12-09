@@ -56,7 +56,16 @@ if you dont want to use dockerhub, you can build the docker yourself.
 docker build . -t sherlock_docker_selfeval
 ```
 
-### How is the model evaluated?
+The outputs of this command are twofold:
+
+1. `examples.html`, which contains a human-readable random sample of 100 predictions
+2. `top_10_predictions.tsv`, which contains the machine-readable predictions for the whole corpus sample presented here.
+
+If you run in docker, these will be contained in the main working
+directory. For ease of access, we've also added precomputed outputs to
+the `outputs_human_readable` directory.
+
+## How is the model evaluated?
 
 We evaluate our model using both automatic metrics and using correlation with human judgment.
 
